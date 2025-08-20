@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+dotenv
+requests
+jinja2
+transformers 
+accelerate 
+bitsandbytes 
+peft 
+scipy 
+trl 
+huggingface_hub
