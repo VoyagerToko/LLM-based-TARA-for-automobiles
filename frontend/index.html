@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TARA Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    .tab-nav {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px 0 10px;
+      padding: 0;
+    }
+
+    .tab-nav li {
+      padding: 10px 20px;
+      margin: 5px;
+      background: #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .tab-nav li.active {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+      background-color: #fff;
+      margin: 10px auto;
+      max-width: 95%;
+      padding: 20px;
+      font-family: sans-serif;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    #loading {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #007bff;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Threat Analysis & Risk Assessment</h1>
+
+  <form id="taraForm">
+    <label for="functionality">Functionality</label>
+    <textarea id="functionality" rows="3" required></textarea>
+
+    <label for="boundaries">System Boundaries</label>
+    <textarea id="boundaries" rows="3" required></textarea>
+
+    <label for="interfaces">Interfaces</label>
+    <textarea id="interfaces" rows="3" required></textarea>
+
+    <button type="submit">Analyze Threat</button>
+  </form>
+
+  <div id="loading" style="display: none;">⏳ Analyzing threat... Please wait.</div>
+
+  <ul class="tab-nav" style="display:none;" id="tab-nav">
+    <li onclick="showTab(0)">1️⃣ Asset Identification</li>
+    <li onclick="showTab(1)">2️⃣ Damage Scenario</li>
+    <li onclick="showTab(2)">3️⃣ Threat Identification</li>
+    <li onclick="showTab(3)">4️⃣ Impact Rating</li>
+    <li onclick="showTab(4)">5️⃣ Attack Path Analysis</li>
+    <li onclick="showTab(5)">6️⃣ Attack Feasibility</li>
+    <li onclick="showTab(6)">7️⃣ Risk Treatment</li>
+    <li onclick="showTab(7)">8️⃣ Security Control</li>
+    <li onclick="showTab(8)">9️⃣ Residual Risk</li>
+    <li onclick="showTab(9)">🧾 Raw JSON</li>
+  </ul>
+
+  <div id="tabs" style="display: none;">
+    <div class="tab-content" id="tab0"></div>
+    <div class="tab-content" id="tab1"></div>
+    <div class="tab-content" id="tab2"></div>
+    <div class="tab-content" id="tab3"></div>
+    <div class="tab-content" id="tab4"></div>
+    <div class="tab-content" id="tab5"></div>
+    <div class="tab-content" id="tab6"></div>
+    <div class="tab-content" id="tab7"></div>
+    <div class="tab-content" id="tab8"></div>
+    <div class="tab-content" id="tab9"><pre id="rawOutput"></pre></div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
